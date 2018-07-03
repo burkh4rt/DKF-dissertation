@@ -1,0 +1,123 @@
+\ProvidesPackage{mcb}[2014/05/09]
+
+\RequirePackage{amsmath,amssymb,amsthm,amscd,bbm,dsfont}
+
+% op defn
+\providecommand{\op}[1]{\ensuremath{\operatorname{#1}}}
+
+% norms and math typesetting
+\providecommand{\cal}[1]{\ensuremath{\mathcal{#1}}}
+\providecommand{\abs}[1]{\ensuremath{\left\lvert#1\right\rvert}}
+\providecommand{\norm}[1]{\ensuremath{\left\lVert#1\right\rVert}}
+\providecommand{\tabs}[1]{\ensuremath{|#1|}}
+\providecommand{\tnorm}[1]{\ensuremath{\|#1\|}}
+\renewcommand{\b}[1]{\ensuremath{\boldsymbol{#1}}}
+
+% sets
+\providecommand{\cl}[1]{\ensuremath{\overline{#1}}}
+\providecommand{\intr}[1]{\ensuremath{{#1}^\circ}}
+\DeclareMathOperator{\supp}{supp}
+
+% logic
+\newcommand{\bc}{\ensuremath{\because}}
+\newcommand{\tf}{\ensuremath{\therefore}}
+
+% mappings 
+\providecommand{\inj}{\ensuremath{\hookrightarrow}}
+\providecommand{\sur}{\ensuremath{\twoheadrightarrow}}
+\providecommand{\bi}{\ensuremath{\hookrightarrow\hspace{-6pt}\rightarrow}}
+\providecommand{\weak}{\ensuremath{\rightharpoonup}}
+\providecommand{\w}{\ensuremath{\Rightarrow}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\im}{im}
+
+% doublestruck 
+\renewcommand{\AA}{\ensuremath{\mathbb{A}}}
+\newcommand{\BB}{\ensuremath{\mathbb{B}}}
+\newcommand{\CC}{\ensuremath{\mathbb{C}}}
+\newcommand{\DD}{\ensuremath{\mathbb{D}}}
+\newcommand{\EE}{\ensuremath{\mathbb{E}}}
+\newcommand{\FF}{\ensuremath{\mathbb{F}}}
+\newcommand{\GG}{\ensuremath{\mathbb{G}}}
+\newcommand{\HH}{\ensuremath{\mathbb{H}}}
+\newcommand{\II}{\ensuremath{\mathbb{I}}}
+\newcommand{\JJ}{\ensuremath{\mathbb{J}}}
+\newcommand{\KK}{\ensuremath{\mathbb{K}}}
+\newcommand{\LL}{\ensuremath{\mathbb{L}}}
+\newcommand{\MM}{\ensuremath{\mathbb{M}}}
+\newcommand{\NN}{\ensuremath{\mathbb{N}}}
+\newcommand{\OO}{\ensuremath{\mathbb{O}}}
+\newcommand{\PP}{\ensuremath{\mathbb{P}}}
+\newcommand{\QQ}{\ensuremath{\mathbb{Q}}}
+\newcommand{\RR}{\ensuremath{\mathbb{R}}}
+\renewcommand{\SS}{\ensuremath{\mathbb{S}}}
+\newcommand{\TT}{\ensuremath{\mathbb{T}}}
+\newcommand{\UU}{\ensuremath{\mathbb{U}}}
+\newcommand{\VV}{\ensuremath{\mathbb{V}}}
+\newcommand{\WW}{\ensuremath{\mathbb{W}}}
+\newcommand{\XX}{\ensuremath{\mathbb{X}}}
+\newcommand{\YY}{\ensuremath{\mathbb{Y}}}
+\newcommand{\ZZ}{\ensuremath{\mathbb{Z}}}
+
+% prob & stats
+\newcommand{\1}{\ensuremath{\mathbbm{1}}}
+\newcommand{\cc}{\complement}
+\newcommand{\indep}{\ensuremath{\perp\!\!\!\perp}}
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Poisson}{Poisson}
+\DeclareMathOperator{\Uniform}{Uniform}
+\DeclareMathOperator{\Bernoulli}{Bernoulli}
+\newcommand{\N}{\ensuremath{\mathcal{N}}}
+
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\cov}{cov}
+
+\newcommand{\mn}{\ensuremath{\wedge}}
+\newcommand{\mx}{\ensuremath{\vee}}
+
+% misc fns
+\DeclareMathOperator*{\argmax}{\arg\max}
+\DeclareMathOperator*{\argmin}{\arg\min}
+
+\newcommand{\spt}{\operatorname{spt}}
+\newcommand{\esup}{\operatorname*{ess\ sup}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\del}{\ensuremath{\partial}}
+\newcommand{\tab}{\ensuremath{\qquad}}
+
+% linr alg
+\newcommand{\ran}{\operatorname{ran}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\codim}{\operatorname{codim}}
+
+% homological alg
+\usepackage{tikz-cd}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\Aut}{\operatorname{Aut}}
+
+% complex analysis
+\renewcommand{\Re}{\ensuremath{\mathfrak{R}}}
+\renewcommand{\Im}{\ensuremath{\mathfrak{I}}}
+\newcommand{\Hol}{\operatorname{Hol}}
+
+% amsthm envir
+\theoremstyle{plain}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{methd}{Method}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{conj}{Conjecture}
+\newtheorem*{exmp}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{rec}{Recall}
+\newtheorem*{nb}{Note}

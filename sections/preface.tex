@@ -1,0 +1,35 @@
+% !TEX root = ../discriminative_filtering.tex
+
+Suppose there is some underlying process $Z_1,\dotsc,Z_T$ about which we are very interested, but that we cannot observe.  Instead, we are sequentially presented with observations or measurements $X_{1:T}$ related to $Z_{1:T}$.  At each time step $1\leq t\leq T$, \emph{filtering} is the process by which we use the observations $X_1,\dotsc, X_t$ to form our best guess for the current hidden state $Z_t$.
+
+Under the \emph{Bayesian} approach to filtering, $X_{1:T},Z_{1:T}$ are endowed with a joint probability distribution.  The process by which we generate $X_{1:T},Z_{1:T}$ can be described using the following graphical model.  This particular form is variously known as a dynamic state-space or hidden Markov model.
+\[
+\begin{CD}
+Z_1 @>>> \cdots @>>>  Z_{t-1} @>>> Z_t @>>> \cdots  @>>> Z_T \\
+@VVV @.	@VVV @VVV @. @VVV \\
+X_1  @. @. X_{t-1} @. X_t @. @. X_T
+\end{CD}
+\]
+We start by drawing $Z_1$ from its marginal distribution $p(z_1)$.  We then generate an observation $X_1$ that depends only on $Z_1$ using the distribution $p(x_1|z_1)$.  At each subsequent time step $t$, we draw $Z_t$ from the distribution $p(z_t|z_{t-1})$ and $X_t$ from the distribution $p(x_t|z_t)$.  These two conditional distributions are very important and characterize the generative process up to initialization of $Z_1$.  The first, $p(z_t|z_{t-1})$, relates the state at time $t$ to the state at time $t-1$ and is often called the state or prediction model.  The second, $p(x_t|z_t)$, relates the current observation to the current state and is called the measurement or observation model, or the likelihood.  The Bayesian solution to the filtering problem returns the conditional distribution of $Z_t$ given that $X_1,\dotsc,X_t$ have been observed to be $x_1,\dotsc,x_t$.  We refer to this distribution $p(z_t|x_{1:t})$ as the posterior.
+
+A key observation is that the current posterior $p(z_t|x_{1:t})$ can be expressed recursively in terms of the previous posterior $p(z_{t-1}|x_{1:t-1})$, the state model $p(z_t|z_{t-1})$, and the measurement model $p(x_t|z_t)$ using the following relation:
+\begin{equation}\label{eq:ck}
+p(z_t|x_{1:t}) \propto p(x_t|z_t) \int p(z_t|z_{t-1})\; p(z_{t-1}|x_{1:t-1}) \; dz_{t-1}.
+\end{equation}
+Through this relation, the Bayesian solution from the previous time step can be updated with a new observation $x_t$ to obtain the Bayesian solution for the current time step.
+
+We refer to any method that inputs probabilistic state and measurement models and returns the posterior or some approximation to it as a \emph{Bayesian filter} or filtering algorithm.  There are a host of ways to perform Bayesian filtering, loosely corresponding to methods by which one can compute the integrals in equation~\ref{eq:ck} (both the explicit integral and the integral required for re-normalization).  We describe them in detail in Chapter~\ref{ch:intro}.  
+
+The research question that Professor Harrison proposed was \emph{``how would one perform Bayesian filtering using a model for $p(z_t|x_t)$ instead of $p(x_t|z_t)$?''} Neural decoding provides an application where the dimensionality of the hidden variable (latent intentions, 2- or 3-d cursor control) tends to be much lower than that of the observations (observed neural firing patterns, made increasingly detailed by recent technological advances).  A model for $p(z_t|x_t)$ could prove more accurate than a model for $p(x_t|z_t)$ when $\dim(Z_t)\ll\dim(X_t)$, especially if such models need to be learned from data.  Bayes' rule relates these two quantities as
+\[
+p(z_t|x_t) = \frac{p(z_t|x_t)\; p(x_t)}{p(z_t)}
+\propto \frac{p(z_t|x_t)}{p(z_t)}
+\]
+up to a constant in $x_t$.
+
+Under the further restriction that $p(z_t|x_t)$ and $p(z_t)$ are approximated as Gaussians satisfying some conditions on their covariance structure, I showed that the posterior $p(z_t|x_{1:t})$ would also be Gaussian and easily computable.  This is, in essence, what we call the \emph{Discriminative Kalman Filter} (DKF).  We explore it in detail in Chapter~\ref{ch:dkf}.  Modeling $p(z_t|x_t)$ as Gaussian proves fundamentally different than modeling $p(x_t|z_t)$ as Gaussian.  In particular, we are no longer specifying a complete generative model for $X_{1:T},Z_{1:T}$.  However, if we consider a limit where $\dim(X_t)\rightarrow\infty$, the Bernstein--von Mises theorem states that under mild conditions, $p(z_t|x_t)$ becomes Gaussian in the total variation metric.  We show in Chapter~\ref{ch:consistency} that, under this condition, the DKF estimate will converge in total variation to the true posterior.  This proof is due in a great part to Prof. Harrison.
+
+Prof. Leigh Hochberg and Dr. David Brandman, along with a talented team including Dr. John Simeral, Jad Saab, Tommy Hosman, among others, implemented the DKF as part of the BrainGate2 clinical trial, and Dr. David Brandman, Brittany Sorice, Jessica Kelemen, Brian Franco, and myself visited the homes of three volunteers to collect data and help them use this filter within the BrainGate system to control an on-screen cursor with mental imagery alone.
+
+After some preliminary experiments comparing the DKF and Kalman filters, Dr. David Brandman suggested we design a version of the DKF to be robust to certain nonstationarities in neural data.  By nonstationarity, we mean that the underlying statistical relationship between measured neural signals $X_t$ and intended control $Z_t$ (characterized by the measurement model) changes over time.  In practice, this is due to both neural plasticity (the brain is changing, learning) and mechanical variability (the intracortical array may drop the signal from a particular neuron, or detect a new neuron).  In Chapter~\ref{ch:robustness}, we describe how we successfully designed, implemented, and tested a Gaussian process model for $p(z_t|x_t)$ that worked in conjunction with the DKF to mitigate nonstationarities occurring in a single neuron.
+

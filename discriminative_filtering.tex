@@ -1,0 +1,246 @@
+% magic comments for offline TeX editors:
+% !TEX root = discriminative_filtering.tex
+% !TEX encoding = UTF-8 Unicode
+% !TeX TS-program = xelatexmk
+% !BIB program = biber
+
+% find tex components in other folders
+\makeatletter
+\def\input@path{{sections/}{styles/}}
+\makeatother
+
+\documentclass[final,nosignature]{brownthesis} % insert scan of signed signature page instead
+\usepackage[main=american,french,german,russian,japanese]{babel}
+
+\usepackage{mcb}
+
+% misc packages
+\usepackage{booktabs} % professional-quality tables
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage[font={sf}]{caption}
+\usepackage{array}
+\usepackage{gensymb} % provides \degree command
+\usepackage[babel,autostyle]{csquotes}
+\usepackage{pdfpages}
+
+% graphics
+\usepackage{graphicx}
+\graphicspath{{figures/}{logos/}} % where to find said graphics
+
+% pdf prep
+\usepackage{hyperxmp}
+\usepackage[
+hidelinks,
+breaklinks=true,
+bookmarks=true,
+unicode=true,
+pdfa=true,
+pdfstartview={FitH},
+colorlinks = {false},
+pdfdisplaydoctitle=true
+]{hyperref}
+
+\hypersetup{%
+pdftitle={A Discriminative Approach to Bayesian Filtering with Applications to Human Neural Decoding},
+pdfauthor={Michael C. Burkhart},
+pdfauthortitle={Ph.D.},
+pdfcopyright={Copyright (C) 2019, Michael C. Burkhart},
+pdfsubject={discriminative Bayesian filtering},
+pdfkeywords={Bayesian filtering, neural decoding, machine learning, dynamic state-space models, hidden Markov models, discriminative learning, supervised learning, robustness, nonstationarities, kernel selection, brain-computer Interfaces, computational neuroscience},
+pdfcontactaddress={Box F},
+pdfcontactcity={Providence, RI},
+pdfcontactpostcode={02912},
+pdfcontactcountry={U.S.A.},
+pdflang={en},
+pdfmetalang={en}
+%pdfapart=1,
+%pdfaconformance=B
+}
+
+% fonts
+\usepackage[varg,libertine]{newtxmath}
+\usepackage[no-math,tuenc]{fontspec}
+\usepackage{microtype}
+\usepackage{breakcites}
+
+\setmainfont{LinLibertine}[
+Path               = ./fonts/,
+Extension      = .otf,
+UprightFont    = *_R,
+BoldFont        = *_RB,
+ItalicFont     = *_RI,
+BoldItalicFont = *_RBI,
+Ligatures      = {Required, Common, Contextual, TeX},
+Contextuals = {Swash, Alternate, WordInitial},
+Kerning        = {On},
+SmallCapsFeatures={Letters=SmallCaps},
+Numbers=OldStyle,
+RawFeature     = {+liga,+calt,+kern}]
+  
+\setsansfont{LinBiolinum}[
+Path               = ./fonts/,
+Extension      = .otf,
+UprightFont    = *_R,
+BoldFont        = *_RB,
+ItalicFont     = *_RI,
+Ligatures      = {Required, Common, Contextual, TeX},
+Contextuals = {Swash, Alternate, WordInitial},
+Kerning        = {On},
+SmallCapsFeatures={Letters=SmallCaps},
+Numbers=OldStyle,
+RawFeature     = {+liga,+calt,+kern}]
+
+\setmonofont{LinLibertine}[
+Path               = ./fonts/,
+Extension      = .otf,
+UprightFont    = *_M,
+Ligatures      = {NoCommon}]
+
+\newfontfamily\TenMincho{TenMincho}[
+Path               = ./fonts/,
+Extension      = .otf,
+UprightFont    = *_R,
+Contextuals = {Swash, Alternate, WordInitial},
+Kerning        = {On},
+CJKShape = {Expert},
+RawFeature     = {+liga,+aalt,+kern,+case,+dlig,+hist}]
+
+% macros
+\input{macros.tex}
+
+% bibliography
+\usepackage[
+backend=biber, % bibtex if in MacTeX
+style=alphabetic,
+sorting=nyt,
+giveninits=true,
+maxbibnames=99
+]{biblatex}
+\addbibresource{discriminative_filtering.bib}
+
+% index
+\usepackage{imakeidx}
+\makeindex[intoc]
+\usepackage{longtable,tabu}
+
+% quotes
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.8\textwidth}
+\renewcommand{\textflush}{flushright}
+\renewcommand{\epigraphsize}{\sffamily} % this is for changing font size, but apparently can also be used to change font style
+
+% end proofs with an anchor
+\renewcommand{\qedsymbol}{\includegraphics[height=12pt]{ri_anchor}}
+
+% use dagger and double-dagger for footnotes
+\makeatletter
+\def\@fnsymbol#1{\ensuremath{\ifcase#1\or \dagger\or \ddagger\or \dagger\dagger \or \ddagger\ddagger \else\@ctrerr\fi}}
+\makeatother
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+% title page
+\title{A Discriminative Approach to Bayesian Filtering with Applications to Human Neural Decoding}
+
+\author{Michael C. Burkhart}
+
+\degrees{B.Sc.'s, Honors Mathematics, Honors Statistics, and Economics, Purdue University, 2011\\
+     M.Sc., Mathematics, Rutgers University, 2013}
+
+% readers
+\principaladvisor{Matthew T. Harrison}
+\reader{Basilis Gidas}
+\reader{Jerome Darbon}
+\dean{Andrew G. Campbell}
+
+% disclaimer
+\disclaimer{Parts of this thesis have or will appear in other publications.  In particular, Chapter~\ref{ch:dkf} is joint work with M. Harrison and D. Brandman, and Chapter~\ref{ch:robustness} is joint work with D. Brandman, M. Harrison, and L. Hochberg, among others.}
+
+\abstract{\input{abstract}}
+%\abstractpage
+
+\beforepreface
+
+% insert a scan of the signed signature page (numbered iii)
+\setcounter{page}{3}
+\includepdf{signature_page}
+\setcounter{page}{4}
+
+\prefacesection{Vita}
+\input{cv}
+
+\prefacesection{Dedication}
+This thesis is dedicated to BrainGate volunteer ``T9'', who upon learning I studied statistics, kindly chided me that statisticians had predicted he would already be dead.  I hope he would be pleased with our work.  May he rest in peace.
+
+\prefacesection{Preface}
+\input{preface}
+
+\prefacesection{Acknowledgements}
+\input{acknowledgements}
+
+\afterpreface
+
+\chapter{An Overview of Bayesian Filtering} \label{ch:intro}
+\epigraph{\foreignlanguage{german}{Beim Anblick eines Wasserfalls meinen wir in den zahllosen Biegungen, Schlängelungen, Brechungen der Wellen Freiheit des Willens und Belieben zu sehen; aber alles ist notwendig, jede Bewegung mathematisch auszurechnen\ldots\ wenn in einem Augenblick das Rad der Welt still stände und ein allwissender, rechnender Verstand da wäre, um diese Pause zu benützen, so könnte er bis in die fernsten Zeiten die Zukunft jedes Wesens weitererzählen und jede Spur bezeichnen, auf der jenes Rad noch rollen wird.}}{F. W. Nietzsche, \emph{Human, All too human}~\nocite{Nie08}}
+% add \footnotemark{} for dagger
+\footnotetext{At the sight of a waterfall we may opine that in the countless curves, spirations and dashes of the waves we behold freedom of the will and of the impulses. But everything is compulsory, everything can be mathematically calculated\ldots\ If, on a sudden, the entire movement of the world stopped short, and an all knowing and reasoning Intelligence were there to take advantage of this pause, He could foretell the future of every being to the remotest ages and indicate the path that would be  taken in the world's further course.}
+\input{probabilistic_filtering_review}
+
+\chapter{Filtering with a Discriminative Model: the Discriminative Kalman Filter (DKF)}
+\label{ch:dkf}
+\epigraph{\foreignlanguage{german}{"`Gerettet ist das edle Glied\\
+Der Geisterwelt vom Bösen,\\
+Wer immer strebend sich bemüht,\\
+Den können wir erlösen."'}}{J. W. von Goethe, \emph{Faust}~\nocite{Goe14}}
+\footnotetext{``This worthy member of the spirit world is rescued from the devil: for him whose striving never ceases we can provide redemption.''}
+\input{dkf_theory}
+
+\chapter{DKF Consistency}
+\epigraph{\foreignlanguage{french}{« Les choses ne peuvent être autrement : car, tout étant fait pour une fin, tout est nécessairement pour la meilleure fin. Remarquez bien que les nez ont été faits pour porter des lunettes, aussi avons--nous des lunettes. Les jambes sont visiblement instituées pour être chaussées, et nous avons des chausses. Les pierres ont été formées pour être taillées, et pour en faire des châteaux, aussi monseigneur a un très beau château ; le plus grand baron de la province doit être le mieux logé ; et, les cochons étant faits pour être mangés, nous mangeons du porc toute l'année : par conséquent, ceux qui ont avancé que tout est bien ont dit une sottise ; il fallait dire que tout est au mieux. »}}{F.-M. ``Voltaire'' Arouet, \emph{Candide}~\nocite{Aro05}}
+\footnotetext{``Things cannot be other than as they are: for, since everything is made to serve an end, everything is necessarily for the best of ends.  Observe how noses were formed to support spectacles, therefore we have spectacles.  Legs are clearly devised for the wearing of breeches, therefore we wear breeches.  Stones were formed to be hewn and made into castles, hence his lordship's beautiful castle, for the greatest baron in the province must perforce be the best housed; and since pigs were made to be eaten, we eat pork all year round; consequently, those who have argued that is all well have been talking nonsense: they should have said that all is for the best.''}
+\label{ch:consistency}
+In this chapter, we prove the main result concerning the DKF's performance as the number of observed dimensions tends to infinity.
+\input{dkf_consistency}
+
+\chapter{Making the DKF robust to nonstationarities}
+\label{ch:robustness}
+\epigraph{`Nihil est toto, quod perstet, in orbe. \\
+cuncta fluunt, omnisque vagans formatur imago.'}{F. ``Ovid'' Naso, \emph{Metamorphoses}~\nocite{Nas04}}
+\footnotetext{``In the whole of the world there is nothing that stays unchanged. All is in flux. Any shape that is formed is constantly shifting.''}
+\input{robustness_intro}
+\input{decoder_robustness}
+ 
+\appendix
+
+\chapter{More on Discriminative Modeling}
+\epigraph{\foreignlanguage{russian} {--- Это водка? --- слабо спросила Маргарита. \\
+Кот подпрыгнул на стуле от обиды. \\
+--- Помилуйте, королева, --- прохрипел он, --- разве я позволил бы себе налить даме водки?
+Это чистый спирт!}}{M. A. Bulgakov, \emph{Master and Margarita}~\nocite{Bul95}}
+\footnotetext{``Is that vodka?'' asked Margarita weakly.  \\ 
+The cat took offense and jumped up on his chair.  \\ 
+``Excuse me, Your Majesty,'' he whined, ``but how could I offer vodka to a lady?  It's pure spirit!''}
+\label{ch:discriminative}
+\input{discriminative_modeling}
+
+\defbibnote{epi}{\epigraph{\foreignlanguage{greek}{«σὺ δὲ ὅταν προσεύχῃ, εἴσελθε εἰς τὸ ταμεῖόν σου καὶ κλείσας τὴν θύραν σου πρόσευξαι τῷ πατρί σου τῷ ἐν τῷ κρυπτῷ· καὶ ὁ πατήρ σου ὁ βλέπων ἐν τῷ κρυπτῷ ἀποδώσει σοι.»}}{Matthew 6:6} \footnotetext{``But you, when you pray, enter into your inner chamber, and having shut your door, pray to your Father who is in secret, and your Father who sees in secret will reward you openly.''}}
+
+\printbibliography[
+heading=bibintoc,
+title={References},
+prenote = {epi}
+]
+
+\printindex
+
+\end{document}
+
+% to see uncited references
+% recheck does not work for biblatex
+% instead:
+% \DeclareBibliographyCategory{cited}
+% \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+% \nocite{*}
+% \printbibliography[title={Further Reading}, notcategory=cited]
