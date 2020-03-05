@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/burkh4rt/docker-test/texlive2018:latest
+FROM docker.pkg.github.com/burkh4rt/docker-test/texlive2018:ubuntu
 MAINTAINER burkh4rt
 
 RUN tlmgr install bbm \
