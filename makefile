@@ -22,5 +22,6 @@ $(PROJECT).pdf: $(PROJECT).tex
 all: $(PROJECT).pdf
 
 clean:
+	docker build -t tl18 .
 	docker run --rm -ti -v $(PWD):/data tl18 latexmk -C
 	-rm -rf $(TEMPDIR)
