@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/243124506.svg)](https://zenodo.org/badge/latestdoi/243124506)
+
 # DKF-dissertation
 
 This repository contains XeLaTeX source code for the dissertation:
