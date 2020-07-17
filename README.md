@@ -1,6 +1,6 @@
 # DKF-dissertation
 
-* This repository contains XeLaTeX source code for the dissertation:
+This repository contains XeLaTeX source code for the dissertation:
 
 M. Burkhart. “A Discriminative Approach to Bayesian Filtering with Applications to Human Neural Decoding.” Ph.D. Dissertation, Brown University (2019)
 
